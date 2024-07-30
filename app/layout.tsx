@@ -1,7 +1,8 @@
 import type { Metadata } from "next";
-import { Inter, Work_Sans as WorkSans } from "next/font/google";
+import { Work_Sans as WorkSans } from "next/font/google";
 import "./globals.css";
 import { ChildProps } from "@/types";
+import Provider from "@/utils/Provider";
 
 const workSans = WorkSans({
   subsets: ["latin"],
@@ -17,7 +18,9 @@ export const metadata: Metadata = {
 export default function RootLayout({ children }: ChildProps) {
   return (
     <html lang="en">
-      <body className={workSans.className}>{children}</body>
+      <body className={workSans.className}>
+        <Provider>{children}</Provider>
+      </body>
     </html>
   );
 }
