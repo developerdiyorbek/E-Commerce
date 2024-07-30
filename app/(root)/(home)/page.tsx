@@ -7,7 +7,7 @@ function Home() {
   const products = useProducts();
   console.log(products);
 
-  return <section className="container mx-auto">Home</section>;
+  return <section className="container mx-auto max-w-7xl">Home</section>;
 }
 
 export default Home;
