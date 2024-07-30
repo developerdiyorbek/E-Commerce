@@ -2,7 +2,7 @@ import type { Metadata } from "next";
 import { Work_Sans as WorkSans } from "next/font/google";
 import "./globals.css";
 import { ChildProps } from "@/types";
-import Provider from "@/utils/Provider";
+import Provider from "@/service/Provider";
 
 const workSans = WorkSans({
   subsets: ["latin"],
@@ -17,7 +17,7 @@ export const metadata: Metadata = {
 
 export default function RootLayout({ children }: ChildProps) {
   return (
-    <html lang="en">
+    <html lang="en" suppressHydrationWarning>
       <body className={workSans.className}>
         <Provider>{children}</Provider>
       </body>

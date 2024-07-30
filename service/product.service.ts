@@ -1,4 +1,4 @@
-import { customAxios } from "@/configs/axios.config";
+import customAxios from "@/configs/axios.config";
 
 export const productUtils = {
   getProducts: async () => {
