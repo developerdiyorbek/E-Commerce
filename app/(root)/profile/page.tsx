@@ -3,8 +3,21 @@
 import { getLoginUser } from "@/Query/queryFn";
 import Image from "next/image";
 import Loading from "../_components/Loading";
+import { useEffect } from "react";
+import { useRouter } from "next/navigation";
+import useAuth from "@/hooks/useAuth";
 
 function Profile() {
+  useAuth();
+  const router = useRouter();
+
+  useEffect(() => {
+    const token = localStorage.getItem("token");
+    if (!token) {
+      router.push("/");
+    }
+  });
+
   const { data: user, isLoading } = getLoginUser();
 
   if (isLoading) return <Loading />;

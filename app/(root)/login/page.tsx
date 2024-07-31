@@ -43,6 +43,7 @@ function Login() {
         JSON.stringify(values1)
       );
       localStorage.setItem("token", login.data.token);
+      localStorage.setItem("refreshToken", login.data.refreshToken);
       toast.success("Successfully login");
       router.push("/profile");
     } catch (error) {

@@ -6,8 +6,10 @@ import { Separator } from "@/components/ui/separator";
 import { useCart } from "@/hooks/useCart";
 import { ArrowRight } from "lucide-react";
 import ShoppingCartItem from "./_components/ShoppingCartItem";
+import useAuth from "@/hooks/useAuth";
 
 function ShoppingCart() {
+  useAuth();
   const { carts, totalPrice, taxes } = useCart();
   return (
     <section className="container mx-auto max-w-7xl pt-10">
@@ -34,7 +36,7 @@ function ShoppingCart() {
           </CardContent>
         </Card>
         <div>
-          <Card className="bg-gradient-to-t from-secondary to-background">
+          <Card>
             <CardContent className="py-4">
               <h1 className="max-md:text-xl text-2xl font-bold">Result</h1>
               <Separator className="my-3" />

@@ -7,12 +7,14 @@ import { Star } from "lucide-react";
 import Loading from "../../_components/Loading";
 import { useRouter } from "next/navigation";
 import { useCart } from "@/hooks/useCart";
+import useAuth from "@/hooks/useAuth";
 
 interface Props {
   params: { productId: number };
 }
 
 function ProductDetail({ params: { productId } }: Props) {
+  useAuth();
   const router = useRouter();
   const { data: product, isLoading } = getProduct(productId);
   const { addToCart } = useCart();

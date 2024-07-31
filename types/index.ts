@@ -31,3 +31,8 @@ export interface IUser {
   password: string;
   phone: string;
 }
+
+export interface DecodedToken {
+  exp?: any;
+  [key: string]: any;
+}

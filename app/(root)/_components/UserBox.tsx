@@ -11,12 +11,14 @@ import {
   DropdownMenuTrigger,
 } from "@/components/ui/dropdown-menu";
 import { Skeleton } from "@/components/ui/skeleton";
+import useAuth from "@/hooks/useAuth";
 import { getLoginUser } from "@/Query/queryFn";
 import Link from "next/link";
 import { useRouter } from "next/navigation";
 import React from "react";
 
 function UserBox() {
+  useAuth();
   const router = useRouter();
   const { data: user, isLoading } = getLoginUser();
 
@@ -25,6 +27,7 @@ function UserBox() {
   // on Log Out
   const handleLogout = () => {
     localStorage.removeItem("token");
+    localStorage.removeItem("refreshToken");
     router.push("/login");
   };
 
