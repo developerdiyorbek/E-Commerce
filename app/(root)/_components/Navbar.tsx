@@ -11,21 +11,20 @@ import { useEffect, useState } from "react";
 import { usePathname } from "next/navigation";
 import UserBox from "./UserBox";
 import { useCart } from "@/hooks/useCart";
+import { Skeleton } from "@/components/ui/skeleton";
 
 function Navbar() {
-  const [isLogin, setIsLogin] = useState<boolean>(() => {
-    const token = localStorage.getItem("token");
-    return !!token;
-  });
+  const [isLogin, setIsLogin] = useState<boolean | null>(null);
 
   const { cartsLength } = useCart();
 
   const pathname = usePathname();
 
   useEffect(() => {
-    const token = localStorage.getItem("token") as string;
-    const isLogin = !!token;
-    setIsLogin(isLogin);
+    if (typeof window !== "undefined") {
+      const token = localStorage.getItem("token");
+      setIsLogin(!!token);
+    }
   }, [pathname]);
 
   return (
@@ -65,9 +64,9 @@ function Navbar() {
             <ModeToggle />
             <Mobile isLogin={isLogin} />
           </div>
-          {isLogin ? (
-            <UserBox />
-          ) : (
+          {isLogin && <UserBox />}
+          {isLogin === null && <Skeleton className="size-10 rounded-md" />}
+          {isLogin === false && (
             <Link href={"/login"}>
               <Button
                 size={"lg"}

@@ -25,9 +25,11 @@ function Login() {
 
   // check if user login before
   useEffect(() => {
-    const token = localStorage.getItem("token");
-    if (token) {
-      router.push("/");
+    if (typeof window !== "undefined") {
+      const token = localStorage.getItem("token");
+      if (token) {
+        router.push("/");
+      }
     }
   });
 

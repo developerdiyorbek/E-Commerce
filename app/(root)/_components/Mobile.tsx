@@ -17,7 +17,7 @@ import { useEffect, useState } from "react";
 import Logo from "./Logo";
 
 interface Props {
-  isLogin: boolean;
+  isLogin: boolean | null;
 }
 
 function Mobile({ isLogin }: Props) {

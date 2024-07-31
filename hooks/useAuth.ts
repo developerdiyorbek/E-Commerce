@@ -12,26 +12,28 @@ const useAuth = () => {
 
   useEffect(() => {
     const checkTokenExpiration = async () => {
-      const token = localStorage.getItem("token");
-      if (!token) {
-        router.push("/login");
-        return;
-      }
-
-      const { exp } = jwtDecode<DecodedToken>(token);
-      const now = Date.now();
-
-      if (now >= exp * 1000) {
-        try {
-          const response = await axios.post(`${BASE_URL}/auth/refresh`, {
-            refreshToken: localStorage.getItem("refreshToken"),
-            expiresInMins: 30,
-          });
-          localStorage.setItem("token", response.data.token);
-          window.location.reload();
-        } catch (error) {
-          console.error("Refresh token olishda xatolik:", error);
+      if (typeof window !== "undefined") {
+        const token = localStorage.getItem("token");
+        if (!token) {
           router.push("/login");
+          return;
+        }
+
+        const { exp } = jwtDecode<DecodedToken>(token);
+        const now = Date.now();
+
+        if (now >= exp * 1000) {
+          try {
+            const response = await axios.post(`${BASE_URL}/auth/refresh`, {
+              refreshToken: localStorage.getItem("refreshToken"),
+              expiresInMins: 30,
+            });
+            localStorage.setItem("token", response.data.token);
+            window.location.reload();
+          } catch (error) {
+            console.error("Refresh token olishda xatolik:", error);
+            router.push("/login");
+          }
         }
       }
     };
