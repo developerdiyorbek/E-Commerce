@@ -12,7 +12,7 @@ const customAxios = axios.create({
 customAxios.interceptors.request.use(
   (config) => {
     const token = localStorage.getItem("token");
-    const authorization = token ? `Token ${token}` : "";
+    const authorization = token ? `Bearer ${token}` : "";
     config.headers.authorization = authorization;
     return config;
   },

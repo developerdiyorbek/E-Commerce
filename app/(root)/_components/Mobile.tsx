@@ -13,13 +13,13 @@ import { Menu } from "lucide-react";
 import Link from "next/link";
 import { usePathname } from "next/navigation";
 import { useEffect, useState } from "react";
+import Logo from "./Logo";
 
 interface Props {
   isLogin: boolean;
-  handleLogout: () => void;
 }
 
-function Mobile({ isLogin, handleLogout }: Props) {
+function Mobile({ isLogin }: Props) {
   const pathname = usePathname();
   const [isOpen, setIsOpen] = useState(false);
 
@@ -40,7 +40,9 @@ function Mobile({ isLogin, handleLogout }: Props) {
       </SheetTrigger>
       <SheetContent side={"left"}>
         <SheetHeader>
-          <h1>Logo</h1>
+          <div className="w-fit mx-auto">
+            <Logo />
+          </div>
           <Separator />
         </SheetHeader>
         <nav className="my-4 flex flex-col">
@@ -56,14 +58,7 @@ function Mobile({ isLogin, handleLogout }: Props) {
           ))}
         </nav>
 
-        {isLogin ? (
-          <Button
-            className="transition-colors hover:bg-primary/80 w-full"
-            onClick={handleLogout}
-          >
-            LogOut
-          </Button>
-        ) : (
+        {!isLogin && (
           <Link href={"/login"}>
             <Button
               size={"lg"}

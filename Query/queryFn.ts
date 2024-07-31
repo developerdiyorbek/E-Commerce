@@ -2,11 +2,13 @@
 
 import { useQuery } from "@tanstack/react-query";
 import { QUERY_KEY } from "./queryKey";
-import { productUtils } from "@/service/product.service";
+import { userService } from "@/service/user.service";
+import { IUser } from "@/types";
 
-export const useProducts = function () {
+export const getLoginUser = function () {
+  // eslint-disable-next-line react-hooks/rules-of-hooks
   return useQuery({
-    queryKey: [QUERY_KEY.products],
-    queryFn: productUtils.getProducts,
+    queryKey: [QUERY_KEY.user],
+    queryFn: userService.getAuthUser,
   });
 };

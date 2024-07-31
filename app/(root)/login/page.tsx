@@ -11,8 +11,8 @@ import { useRouter } from "next/navigation";
 import { useEffect } from "react";
 
 const initialValues = {
-  username: "mor_2314",
-  password: "83r5^_",
+  username: "emilys",
+  password: "emilyspass",
 };
 
 interface FormProps {
@@ -40,7 +40,7 @@ function Login() {
       );
       localStorage.setItem("token", login.data.token);
       toast.success("Successfully login");
-      router.push("/");
+      router.push("/profile");
     } catch (error) {
       console.log(error);
       toast.error("Something went wrong");

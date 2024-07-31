@@ -8,24 +8,22 @@ import { navLinks } from "@/constants";
 import ModeToggle from "@/components/shared/ModeToggle";
 import Logo from "./Logo";
 import { useEffect, useState } from "react";
-import { usePathname, useRouter } from "next/navigation";
+import { usePathname } from "next/navigation";
+import UserBox from "./UserBox";
 
 function Navbar() {
-  const [isLogin, setIsLogin] = useState(false);
+  const [isLogin, setIsLogin] = useState<boolean>(() => {
+    const token = localStorage.getItem("token");
+    return !!token;
+  });
+
   const pathname = usePathname();
-  const router = useRouter();
 
   useEffect(() => {
     const token = localStorage.getItem("token") as string;
     const isLogin = !!token;
     setIsLogin(isLogin);
   }, [pathname]);
-
-  // on Log Out
-  const handleLogout = () => {
-    localStorage.removeItem("token");
-    router.push("/login");
-  };
 
   return (
     <header className="fixed inset-0 z-40 h-20 bg-background/70 backdrop-blur-xl border-b">
@@ -48,21 +46,15 @@ function Navbar() {
         <div className="flex items-center gap-2">
           <div className="flex items-center gap-2 md:border-r md:pr-3">
             <Button size={"icon"} variant={"outline"}>
-              <Link href={"/shopping/cart"}>
+              <Link href={"/shoppingcart"}>
                 <ShoppingCart />
               </Link>
             </Button>
             <ModeToggle />
-            <Mobile isLogin={isLogin} handleLogout={handleLogout} />
+            <Mobile isLogin={isLogin} />
           </div>
           {isLogin ? (
-            <Button
-              size={"lg"}
-              className="hidden md:flex transition-colors hover:bg-primary/80"
-              onClick={handleLogout}
-            >
-              LogOut
-            </Button>
+            <UserBox />
           ) : (
             <Link href={"/login"}>
               <Button
