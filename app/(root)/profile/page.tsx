@@ -9,8 +9,6 @@ function Profile() {
 
   if (isLoading) return <Loading />;
 
-  console.log(user);
-
   return (
     <section className="container mx-auto py-5 md:py-10 max-w-7xl">
       <div className="flex max-md:flex-col md:space-x-20 max-md:space-y-9">

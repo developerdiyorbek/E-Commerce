@@ -6,6 +6,7 @@ import {
   Sheet,
   SheetContent,
   SheetHeader,
+  SheetTitle,
   SheetTrigger,
 } from "@/components/ui/sheet";
 import { navLinks } from "@/constants";
@@ -43,6 +44,7 @@ function Mobile({ isLogin }: Props) {
           <div className="w-fit mx-auto">
             <Logo />
           </div>
+          <SheetTitle></SheetTitle>
           <Separator />
         </SheetHeader>
         <nav className="my-4 flex flex-col">

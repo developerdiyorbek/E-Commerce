@@ -10,12 +10,15 @@ import Logo from "./Logo";
 import { useEffect, useState } from "react";
 import { usePathname } from "next/navigation";
 import UserBox from "./UserBox";
+import { useCart } from "@/hooks/useCart";
 
 function Navbar() {
   const [isLogin, setIsLogin] = useState<boolean>(() => {
     const token = localStorage.getItem("token");
     return !!token;
   });
+
+  const { cartsLength } = useCart();
 
   const pathname = usePathname();
 
@@ -45,9 +48,18 @@ function Navbar() {
 
         <div className="flex items-center gap-2">
           <div className="flex items-center gap-2 md:border-r md:pr-3">
-            <Button size={"icon"} variant={"outline"}>
+            <Button
+              size={"icon"}
+              variant={cartsLength() ? "secondary" : "outline"}
+              className="relative"
+            >
               <Link href={"/shoppingcart"}>
                 <ShoppingCart />
+                {cartsLength() ? (
+                  <div className="absolute -right-3 -top-2 flex size-6 items-center justify-center rounded-full bg-destructive">
+                    {cartsLength()}
+                  </div>
+                ) : null}
               </Link>
             </Button>
             <ModeToggle />

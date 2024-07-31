@@ -33,10 +33,14 @@ function Login() {
 
   // handle Submit
   const handleSubmit = async (values: FormProps) => {
+    const values1 = {
+      ...values,
+      expiresInMins: 1,
+    };
     try {
       const login = await customAxios.post(
         "auth/login",
-        JSON.stringify(values)
+        JSON.stringify(values1)
       );
       localStorage.setItem("token", login.data.token);
       toast.success("Successfully login");
