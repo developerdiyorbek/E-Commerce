@@ -10,6 +10,7 @@ import {
   DropdownMenuTrigger,
 } from "@/components/ui/dropdown-menu";
 import { Skeleton } from "@/components/ui/skeleton";
+import { authStore } from "@/hooks/authStore";
 import { getLoginUser } from "@/Query/queryFn";
 import Link from "next/link";
 import { useRouter } from "next/navigation";
@@ -17,6 +18,7 @@ import React from "react";
 
 function UserBox() {
   const router = useRouter();
+  const { setIsAuth } = authStore();
   const { data: user, isLoading } = getLoginUser();
 
   if (isLoading) return <Skeleton className="size-10 rounded-full" />;
@@ -26,6 +28,7 @@ function UserBox() {
     localStorage.removeItem("token");
     localStorage.removeItem("refreshToken");
     router.push("/login");
+    setIsAuth(false);
   };
 
   return (

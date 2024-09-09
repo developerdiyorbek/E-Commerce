@@ -9,6 +9,7 @@ import customAxios from "@/configs/axios.config";
 import { toast } from "sonner";
 import { useRouter } from "next/navigation";
 import { useEffect } from "react";
+import { authStore } from "@/hooks/authStore";
 
 const initialValues = {
   username: "emilys",
@@ -22,19 +23,11 @@ interface FormProps {
 
 function Login() {
   const router = useRouter();
-
-  // check if user login before
-  useEffect(() => {
-    if (typeof window !== "undefined") {
-      const token = localStorage.getItem("token");
-      if (token) {
-        router.push("/");
-      }
-    }
-  });
+  const { setIsAuth, setLoading, isAuth } = authStore();
 
   // handle Submit
   const handleSubmit = async (values: FormProps) => {
+    setLoading(true);
     try {
       const login = await customAxios.post(
         "auth/login",
@@ -45,13 +38,25 @@ function Login() {
       );
       localStorage.setItem("token", login.data.token);
       localStorage.setItem("refreshToken", login.data.refreshToken);
+      setIsAuth(true);
       toast.success("Successfully login");
       router.push("/profile");
     } catch (error) {
       console.log(error);
       toast.error("Something went wrong");
+      setIsAuth(false);
+    } finally {
+      setLoading(false);
     }
   };
+
+  // check if user is already authenticated
+  useEffect(() => {
+    if (isAuth) {
+      router.push("/");
+    }
+    // eslint-disable-next-line react-hooks/exhaustive-deps
+  }, [isAuth]);
 
   return (
     <section className="mt-40 container mx-auto">

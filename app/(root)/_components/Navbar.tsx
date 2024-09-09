@@ -7,25 +7,18 @@ import Mobile from "./Mobile";
 import { navLinks } from "@/constants";
 import ModeToggle from "@/components/shared/ModeToggle";
 import Logo from "./Logo";
-import { useEffect, useState } from "react";
 import { usePathname } from "next/navigation";
 import UserBox from "./UserBox";
 import { useCart } from "@/hooks/useCart";
 import { Skeleton } from "@/components/ui/skeleton";
+import { authStore } from "@/hooks/authStore";
 
 function Navbar() {
-  const [isLogin, setIsLogin] = useState<boolean | null>(null);
+  const { isAuth, isLoading } = authStore();
 
   const { cartsLength } = useCart();
 
   const pathname = usePathname();
-
-  useEffect(() => {
-    if (typeof window !== "undefined") {
-      const token = localStorage.getItem("token");
-      setIsLogin(!!token);
-    }
-  }, [pathname]);
 
   return (
     <header className="fixed inset-0 z-40 h-20 bg-background/70 backdrop-blur-xl border-b">
@@ -64,11 +57,9 @@ function Navbar() {
               </Link>
             </Button>
             <ModeToggle />
-            <Mobile isLogin={isLogin} />
+            <Mobile isLogin={isAuth} />
           </div>
-          {isLogin && <UserBox />}
-          {isLogin === null && <Skeleton className="size-10 rounded-md" />}
-          {isLogin === false && (
+          {!isAuth ? (
             <Link href={"/login"}>
               <Button
                 size={"lg"}
@@ -77,6 +68,10 @@ function Navbar() {
                 Login
               </Button>
             </Link>
+          ) : isLoading ? (
+            <Skeleton className="size-10 rounded-md" />
+          ) : (
+            <UserBox />
           )}
         </div>
       </div>
