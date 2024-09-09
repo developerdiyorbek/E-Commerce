@@ -1,6 +1,9 @@
 "use client";
 
-import { Avatar, AvatarImage } from "@/components/ui/avatar";
+import { authStore } from "@/hooks/authStore";
+import { getLoginUser } from "@/Query/queryFn";
+import { useRouter } from "next/navigation";
+import { Skeleton } from "../ui/skeleton";
 import {
   DropdownMenu,
   DropdownMenuContent,
@@ -8,13 +11,9 @@ import {
   DropdownMenuItem,
   DropdownMenuSeparator,
   DropdownMenuTrigger,
-} from "@/components/ui/dropdown-menu";
-import { Skeleton } from "@/components/ui/skeleton";
-import { authStore } from "@/hooks/authStore";
-import { getLoginUser } from "@/Query/queryFn";
+} from "../ui/dropdown-menu";
+import { Avatar, AvatarImage } from "../ui/avatar";
 import Link from "next/link";
-import { useRouter } from "next/navigation";
-import React from "react";
 
 function UserBox() {
   const router = useRouter();

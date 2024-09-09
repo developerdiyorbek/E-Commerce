@@ -1,8 +1,7 @@
 import type { Metadata } from "next";
 import { Work_Sans as WorkSans } from "next/font/google";
 import { ChildProps } from "@/types";
-import Provider from "@/service/Provider";
-
+import Provider from "@/components/providers/Provider";
 import "./globals.css";
 
 const workSans = WorkSans({

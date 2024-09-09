@@ -8,10 +8,10 @@ import { navLinks } from "@/constants";
 import ModeToggle from "@/components/shared/ModeToggle";
 import Logo from "./Logo";
 import { usePathname } from "next/navigation";
-import UserBox from "./UserBox";
 import { useCart } from "@/hooks/useCart";
 import { Skeleton } from "@/components/ui/skeleton";
 import { authStore } from "@/hooks/authStore";
+import UserBox from "@/components/shared/UserBox";
 
 function Navbar() {
   const { isAuth, isLoading } = authStore();
