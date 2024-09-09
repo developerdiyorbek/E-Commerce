@@ -35,3 +35,14 @@ export interface IUser {
 export interface CategoryProps {
   params: { categoryId: string };
 }
+
+export interface IPost {
+  body: string;
+  id: number;
+  reactions: {
+    dislikes: number;
+    likes: number;
+  };
+  title: string;
+  views: string;
+}
