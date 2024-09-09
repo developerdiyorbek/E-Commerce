@@ -5,7 +5,12 @@ function Logo() {
   return (
     <Link href={"/"}>
       <div className="size-14 relative">
-        <Image src={"/logo.png"} fill alt="Logo" />
+        <Image
+          src={"/logo.png"}
+          fill
+          alt="Logo"
+          sizes="(max-width: 768px) 100vw, (max-width: 1200px) 50vw, 33vw"
+        />
       </div>
     </Link>
   );

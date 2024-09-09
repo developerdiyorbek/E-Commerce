@@ -21,4 +21,34 @@ customAxios.interceptors.request.use(
   }
 );
 
+customAxios.interceptors.response.use(
+  (config) => {
+    return config;
+  },
+  async (error) => {
+    const originalRequest = error.config;
+    if (
+      error.response.status === 401 &&
+      error.config &&
+      !error.config._isRetry
+    ) {
+      originalRequest._isRetry = true;
+      try {
+        const { data } = await customAxios.post(
+          "/auth/refresh",
+          JSON.stringify({
+            refreshToken: localStorage.getItem("refreshToken"),
+            expiresInMins: 60,
+          })
+        );
+        localStorage.setItem("token", data.token);
+        return customAxios.request(originalRequest);
+      } catch (error) {
+        console.log(error);
+      }
+    }
+    throw error;
+  }
+);
+
 export default customAxios;

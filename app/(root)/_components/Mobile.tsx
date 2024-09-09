@@ -5,6 +5,7 @@ import { Separator } from "@/components/ui/separator";
 import {
   Sheet,
   SheetContent,
+  SheetDescription,
   SheetHeader,
   SheetTitle,
   SheetTrigger,
@@ -39,12 +40,13 @@ function Mobile({ isLogin }: Props) {
           <Menu />
         </Button>
       </SheetTrigger>
-      <SheetContent side={"left"}>
+      <SheetTitle></SheetTitle>
+      <SheetDescription></SheetDescription>
+      <SheetContent side={"left"} aria-describedby="mobile-menu-description">
         <SheetHeader>
           <div className="w-fit mx-auto">
             <Logo />
           </div>
-          <SheetTitle></SheetTitle>
           <Separator />
         </SheetHeader>
         <nav className="my-4 flex flex-col">

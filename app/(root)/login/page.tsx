@@ -35,14 +35,13 @@ function Login() {
 
   // handle Submit
   const handleSubmit = async (values: FormProps) => {
-    const values1 = {
-      ...values,
-      expiresInMins: 1,
-    };
     try {
       const login = await customAxios.post(
         "auth/login",
-        JSON.stringify(values1)
+        JSON.stringify({
+          ...values,
+          expiresInMins: 1,
+        })
       );
       localStorage.setItem("token", login.data.token);
       localStorage.setItem("refreshToken", login.data.refreshToken);

@@ -18,6 +18,7 @@ const CustomImage = ({ product, fill }: Props) => {
         <Image
           src={product.images[0]}
           alt={product.category}
+          sizes="(max-width: 768px) 100vw, (max-width: 1200px) 50vw, 33vw"
           fill
           className={`object-contain flex-1 duration-700 ease-in-out group-hover:opacity-75  ${
             isLoading
@@ -31,6 +32,7 @@ const CustomImage = ({ product, fill }: Props) => {
         <Image
           src={product.images[0]}
           alt={product.category}
+          sizes="(max-width: 768px) 100vw, (max-width: 1200px) 50vw, 33vw"
           className={`object-contain  duration-700 ease-in-out group-hover:opacity-75  ${
             isLoading
               ? "scale-110 blur-2xl grayscale"

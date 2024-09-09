@@ -13,7 +13,12 @@ function Profile() {
     <section className="container mx-auto py-5 md:py-10 max-w-7xl">
       <div className="flex max-md:flex-col md:space-x-20 max-md:space-y-9">
         <div className="relative size-52">
-          <Image src={user.image} fill alt={user.firstName} />
+          <Image
+            src={user.image}
+            fill
+            alt={user.firstName}
+            sizes="(max-width: 768px) 100vw, (max-width: 1200px) 50vw, 33vw"
+          />
         </div>
         <div>
           <h2>
