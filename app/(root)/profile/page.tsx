@@ -5,7 +5,6 @@ import Image from "next/image";
 import Loading from "../_components/Loading";
 
 function Profile() {
-
   const { data: user, isLoading } = getLoginUser();
 
   if (isLoading) return <Loading />;

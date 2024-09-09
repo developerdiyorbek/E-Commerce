@@ -11,7 +11,7 @@ interface Props extends IProduct {
 }
 
 function ShoppingCartItem(card: Props) {
-  const { removeFromCart, increment, decrement, carts } = useCart();
+  const { removeFromCart, increment, decrement } = useCart();
 
   return (
     <div className="grid w-full grid-cols-3 gap-4 rounded-md p-4 shadow-md dark:shadow-sm dark:shadow-white max-md:grid-cols-1">

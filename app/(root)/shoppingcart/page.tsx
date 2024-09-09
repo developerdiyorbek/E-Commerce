@@ -6,10 +6,8 @@ import { Separator } from "@/components/ui/separator";
 import { useCart } from "@/hooks/useCart";
 import { ArrowRight } from "lucide-react";
 import ShoppingCartItem from "./_components/ShoppingCartItem";
-import useAuth from "@/hooks/useAuth";
 
 function ShoppingCart() {
-  useAuth();
   const { carts, totalPrice, taxes } = useCart();
   return (
     <section className="container mx-auto max-w-7xl pt-10">
