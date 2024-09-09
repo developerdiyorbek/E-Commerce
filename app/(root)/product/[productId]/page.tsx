@@ -4,10 +4,10 @@ import CustomImage from "@/components/shared/CustomImage";
 import { Button } from "@/components/ui/button";
 import { getProduct } from "@/Query/queryFn";
 import { Star } from "lucide-react";
-import Loading from "../../_components/Loading";
 import { useRouter } from "next/navigation";
 import { useCart } from "@/hooks/useCart";
 import useAuth from "@/hooks/useAuth";
+import Loading from "../../_components/Loading";
 
 interface Props {
   params: { productId: number };
@@ -16,6 +16,7 @@ interface Props {
 function ProductDetail({ params: { productId } }: Props) {
   useAuth();
   const router = useRouter();
+
   const { data: product, isLoading } = getProduct(productId);
   const { addToCart } = useCart();
 

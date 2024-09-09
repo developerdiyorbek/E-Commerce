@@ -3,10 +3,8 @@
 import { getLoginUser } from "@/Query/queryFn";
 import Image from "next/image";
 import Loading from "../_components/Loading";
-import useAuth from "@/hooks/useAuth";
 
 function Profile() {
-  useAuth();
 
   const { data: user, isLoading } = getLoginUser();
 

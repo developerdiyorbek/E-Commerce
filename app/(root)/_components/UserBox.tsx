@@ -1,7 +1,6 @@
 "use client";
 
 import { Avatar, AvatarImage } from "@/components/ui/avatar";
-import { Button } from "@/components/ui/button";
 import {
   DropdownMenu,
   DropdownMenuContent,
@@ -18,7 +17,6 @@ import { useRouter } from "next/navigation";
 import React from "react";
 
 function UserBox() {
-  useAuth();
   const router = useRouter();
   const { data: user, isLoading } = getLoginUser();
 
@@ -72,9 +70,17 @@ function UserBox() {
                 Profile
               </DropdownMenuItem>
             </Link>
-            <Button variant={"destructive"} onClick={handleLogout}>
+            <Link href={"/admin"}>
+              <DropdownMenuItem className="w-full cursor-pointer text-muted-foreground">
+                Admin
+              </DropdownMenuItem>
+            </Link>
+            <DropdownMenuItem
+              className="w-full cursor-pointer text-muted-foreground"
+              onClick={handleLogout}
+            >
               Log Out
-            </Button>
+            </DropdownMenuItem>
           </div>
         </DropdownMenuGroup>
       </DropdownMenuContent>

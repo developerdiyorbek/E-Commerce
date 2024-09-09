@@ -37,7 +37,9 @@ function Navbar() {
               <Link
                 href={`/${nav.route}`}
                 key={nav.id}
-                className="flex h-10 cursor-pointer items-center gap-2 rounded-md px-3 transition-colors hover:bg-blue-400/20"
+                className={`flex h-10 cursor-pointer items-center gap-2 rounded-md px-3 transition-colors hover:bg-blue-400/20 ${
+                  nav.route === pathname.slice(1) && "bg-blue-400/20"
+                } `}
               >
                 {nav.name}
               </Link>

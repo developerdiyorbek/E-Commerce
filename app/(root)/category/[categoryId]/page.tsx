@@ -1,12 +1,8 @@
 import ProductItem from "../../_components/ProductItem";
-import { IProduct } from "@/types";
+import { CategoryProps, IProduct } from "@/types";
 import { BASE_URL } from "@/constants";
 
-interface Props {
-  params: { categoryId: string };
-}
-
-async function Page({ params: { categoryId } }: Props) {
+async function Page({ params: { categoryId } }: CategoryProps) {
   const productsJSON = await fetch(
     `${BASE_URL}/products/category/${categoryId}`
   );

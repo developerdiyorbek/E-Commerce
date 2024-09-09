@@ -32,7 +32,6 @@ export interface IUser {
   phone: string;
 }
 
-export interface DecodedToken {
-  exp?: any;
-  [key: string]: any;
+export interface CategoryProps {
+  params: { categoryId: string };
 }

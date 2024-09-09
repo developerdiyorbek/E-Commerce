@@ -10,7 +10,7 @@ async function Home() {
   return (
     <section className="container py-12 mx-auto max-w-7xl">
       <h1 className="text-center mb-8 max-md:text-2xl text-3xl text-muted-foreground">
-        Categories we have
+        Product categories
       </h1>
       <div className="grid grid-cols-1 gap-x-4 gap-y-5 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4">
         {categories.map((category: ICategory) => (
