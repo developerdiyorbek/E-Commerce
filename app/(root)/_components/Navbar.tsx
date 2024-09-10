@@ -6,12 +6,12 @@ import Link from "next/link";
 import Mobile from "./Mobile";
 import { navLinks } from "@/constants";
 import ModeToggle from "@/components/shared/ModeToggle";
-import Logo from "./Logo";
 import { usePathname } from "next/navigation";
 import { useCart } from "@/hooks/useCart";
 import { Skeleton } from "@/components/ui/skeleton";
 import { authStore } from "@/hooks/authStore";
 import UserBox from "@/components/shared/UserBox";
+import Logo from "@/components/shared/Logo";
 
 function Navbar() {
   const { isAuth, isLoading } = authStore();

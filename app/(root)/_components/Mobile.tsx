@@ -1,5 +1,6 @@
 "use client";
 
+import Logo from "@/components/shared/Logo";
 import { Button } from "@/components/ui/button";
 import { Separator } from "@/components/ui/separator";
 import {
@@ -15,7 +16,6 @@ import { Menu } from "lucide-react";
 import Link from "next/link";
 import { usePathname } from "next/navigation";
 import { useEffect, useState } from "react";
-import Logo from "./Logo";
 
 interface Props {
   isLogin: boolean | null;
