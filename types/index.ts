@@ -46,3 +46,13 @@ export interface IPost {
   title: string;
   views: string;
 }
+
+export interface IComment {
+  id: number;
+  body: string;
+  postId: string;
+  likes: number;
+  user: {
+    username: string;
+  };
+}
