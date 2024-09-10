@@ -12,8 +12,8 @@ import { useEffect } from "react";
 import { authStore } from "@/hooks/authStore";
 
 const initialValues = {
-  username: "emilys",
-  password: "emilyspass",
+  username: "noahh",
+  password: "noahhpass",
 };
 
 interface FormProps {
@@ -42,7 +42,7 @@ function Login() {
       toast.success("Successfully login");
       router.push("/profile");
     } catch (error) {
-      console.log(error);
+      console.error(error);
       toast.error("Something went wrong");
       setIsAuth(false);
     } finally {

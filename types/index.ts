@@ -22,6 +22,7 @@ export interface ICategory {
 }
 
 export interface IUser {
+  id: number;
   age: number;
   email: string;
   firstName: string;
@@ -55,4 +56,10 @@ export interface IComment {
   user: {
     username: string;
   };
+}
+
+export interface ITodo {
+  id: number;
+  todo: string;
+  completed: boolean;
 }
