@@ -1,5 +1,11 @@
+import PageHeader from "../_components/PageHeader";
+
 function Page() {
-  return <div>Posts</div>;
+  return (
+    <>
+      <PageHeader title="Posts" description="Here is latest posts" />
+    </>
+  );
 }
 
 export default Page;
