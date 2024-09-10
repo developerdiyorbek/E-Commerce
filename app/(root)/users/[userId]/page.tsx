@@ -1,19 +1,6 @@
 import { BASE_URL } from "@/constants";
 import { Avatar, AvatarImage, AvatarFallback } from "@/components/ui/avatar";
-import {
-  Card,
-  CardHeader,
-  CardContent,
-  CardTitle,
-  CardDescription,
-} from "@/components/ui/card";
 import { ITodo } from "@/types";
-import {
-  ImCheckboxChecked,
-  ImCheckboxUnchecked,
-  ImRadioChecked,
-} from "react-icons/im";
-import { Checkbox } from "@/components/ui/checkbox";
 import TodoItem from "./_components/TodoItem";
 
 interface Props {
@@ -52,9 +39,11 @@ async function Page({ params: { userId } }: Props) {
 
       <h2 className="text-xl font-bold mb-4">Todos</h2>
       <div className="grid gap-4 sm:grid-cols-2 lg:grid-cols-3">
-        {todos.map((todo: ITodo) => (
-          <TodoItem todo={todo} key={todo.id} />
-        ))}
+        {todos.length ? (
+          todos.map((todo: ITodo) => <TodoItem todo={todo} key={todo.id} />)
+        ) : (
+          <div>Todos aren't available in this user</div>
+        )}
       </div>
     </section>
   );
