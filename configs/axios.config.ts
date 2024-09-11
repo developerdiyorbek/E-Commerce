@@ -38,7 +38,7 @@ customAxios.interceptors.response.use(
           "/auth/refresh",
           JSON.stringify({
             refreshToken: localStorage.getItem("refreshToken"),
-            expiresInMins: 60,
+            expiresInMins: 90,
           })
         );
         localStorage.setItem("token", data.token);

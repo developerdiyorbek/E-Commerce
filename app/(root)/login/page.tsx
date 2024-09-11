@@ -4,7 +4,7 @@ import { Button } from "@/components/ui/button";
 import { Card, CardContent, CardHeader } from "@/components/ui/card";
 import { loginSchema } from "@/lib/validation";
 import { Formik, Form } from "formik";
-import FieldForm from "../_components/FieldForm";
+import FieldForm from "../../../components/shared/FieldForm";
 import customAxios from "@/configs/axios.config";
 import { toast } from "sonner";
 import { useRouter } from "next/navigation";
