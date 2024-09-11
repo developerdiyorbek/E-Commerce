@@ -17,3 +17,8 @@ export const addPostSchema = Yup.object({
   body: Yup.string().min(8).required(),
   userId: Yup.string().min(2).required(),
 });
+
+export const addTodoSchema = Yup.object({
+  todo: Yup.string().min(3).required(),
+  userId: Yup.string().min(2).required(),
+});
