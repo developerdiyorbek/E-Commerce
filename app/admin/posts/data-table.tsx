@@ -57,15 +57,15 @@ export function DataTable<TData, TValue>({
     <div className="rounded-md border bg-white dark:bg-slate-700 dark:text-white">
       <div className="grid grid-cols-2 py-4 mx-4 items-center max-sm:grid-cols-1 max-sm:gap-y-2">
         <Input
-          placeholder="Filter by name..."
-          value={(table.getColumn("firstName")?.getFilterValue() as string) ?? ""}
+          placeholder="Filter by title..."
+          value={(table.getColumn("title")?.getFilterValue() as string) ?? ""}
           onChange={(event) =>
-            table.getColumn("firstName")?.setFilterValue(event.target.value)
+            table.getColumn("title")?.setFilterValue(event.target.value)
           }
           className="max-w-sm"
         />
         <div className="sm:text-end max-md:text-sm text-muted-foreground">
-          There are {data.length} users
+          There are {data.length} posts
         </div>
       </div>
       <Table>

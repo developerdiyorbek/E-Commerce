@@ -11,3 +11,9 @@ export const addUserSchema = Yup.object({
   gender: Yup.string().min(2).required(),
   birthdate: Yup.string().required(),
 });
+
+export const addPostSchema = Yup.object({
+  title: Yup.string().min(3).required(),
+  body: Yup.string().min(8).required(),
+  userId: Yup.string().min(2).required(),
+});
