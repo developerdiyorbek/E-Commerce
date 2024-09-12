@@ -1,6 +1,11 @@
 import { BASE_URL } from "@/constants";
 import UserCard from "./_components/UserCard";
 import { IUser } from "@/types";
+import { Metadata } from "next";
+
+export const metadata: Metadata = {
+  title: "User profile",
+};
 
 async function Page() {
   const usersJSON = await fetch(`${BASE_URL}/users`);

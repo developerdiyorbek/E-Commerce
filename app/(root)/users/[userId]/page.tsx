@@ -2,6 +2,24 @@ import { BASE_URL } from "@/constants";
 import { Avatar, AvatarImage, AvatarFallback } from "@/components/ui/avatar";
 import { ITodo } from "@/types";
 import TodoItem from "./_components/TodoItem";
+import { Metadata } from "next";
+
+export async function generateMetadata({
+  params,
+}: {
+  params: { userId: string };
+}): Promise<Metadata> {
+  const userJSON = await fetch(`${BASE_URL}/users/${params.userId}`);
+  const user = await userJSON.json();
+
+  return {
+    title: `${user.firstName} ${user.lastName}`,
+    openGraph: {
+      images: user.image,
+      title: `${user.firstName} ${user.lastName}`,
+    },
+  };
+}
 
 interface Props {
   params: { userId: string };

@@ -1,6 +1,11 @@
 import ProductItem from "../../_components/ProductItem";
 import { CategoryProps, IProduct } from "@/types";
 import { BASE_URL } from "@/constants";
+import { Metadata } from "next";
+
+export const metadata: Metadata = {
+  title: "Categories",
+};
 
 async function Page({ params: { categoryId } }: CategoryProps) {
   const productsJSON = await fetch(

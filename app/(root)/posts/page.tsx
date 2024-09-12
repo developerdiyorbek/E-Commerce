@@ -1,6 +1,11 @@
 import { BASE_URL } from "@/constants";
 import PostItem from "./_components/PostItem";
 import { IPost } from "@/types";
+import { Metadata } from "next";
+
+export const metadata: Metadata = {
+  title: "Posts",
+};
 
 async function Posts() {
   const postsJSON = await fetch(`${BASE_URL}/posts`);

@@ -2,6 +2,25 @@ import { BASE_URL } from "@/constants";
 import PostItemBottom from "../_components/PostItemBottom";
 import CommentCard from "./_components/CommentCard";
 import { IComment } from "@/types";
+import { Metadata } from "next";
+
+export async function generateMetadata({
+  params,
+}: {
+  params: { postId: string };
+}): Promise<Metadata> {
+  const postJSON = await fetch(`${BASE_URL}/posts/${params.postId}`);
+  const post = await postJSON.json();
+
+  return {
+    title: post.title,
+    description: post.body,
+    openGraph: {
+      title: post.title,
+      description: post.body,
+    },
+  };
+}
 
 interface Props {
   params: { postId: string };
