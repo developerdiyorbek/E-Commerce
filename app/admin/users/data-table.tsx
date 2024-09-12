@@ -27,6 +27,7 @@ import { useState } from "react";
 import { Separator } from "@/components/ui/separator";
 import { IUser } from "./columns";
 import EditUser from "./_components/EditUser";
+import { toast } from "sonner";
 
 interface DataTableProps<TData, TValue> {
   columns: ColumnDef<TData, TValue>[];
@@ -64,6 +65,12 @@ export function DataTable<TData, TValue>({
 
   const handleSave = (updatedUser: IUser) => {
     console.log("User saved:", updatedUser);
+    toast.success(`User  edited`);
+    setIsModalOpen(false);
+  };
+
+  const handDeleteUser = (user: IUser) => {
+    toast.success(`User ${user.id} deleted`);
   };
 
   return (
@@ -128,7 +135,12 @@ export function DataTable<TData, TValue>({
                     </Button>
                   </TableCell>
                   <TableCell>
-                    <Button variant="destructive">Delete</Button>
+                    <Button
+                      variant="destructive"
+                      onClick={() => handDeleteUser(row.original as IUser)}
+                    >
+                      Delete
+                    </Button>
                   </TableCell>
                 </TableRow>
               ))
