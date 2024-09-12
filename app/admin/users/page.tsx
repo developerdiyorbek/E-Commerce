@@ -6,7 +6,8 @@ import { Separator } from "@/components/ui/separator";
 import AddUser from "./_components/AddUser";
 
 async function Page() {
-  const usersJSON = await fetch(`${BASE_URL}/users`);
+  const usersJSON = await fetch(`${BASE_URL}/users?limit=${50}`);
+
   const { users } = await usersJSON.json();
 
   return (

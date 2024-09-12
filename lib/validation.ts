@@ -22,3 +22,9 @@ export const addTodoSchema = Yup.object({
   todo: Yup.string().min(3).required(),
   userId: Yup.string().min(2).required(),
 });
+
+export const editUserSchema = Yup.object({
+  name: Yup.string().min(4).required(),
+  gender: Yup.string().min(2).required(),
+  birthdate: Yup.string().required(),
+});

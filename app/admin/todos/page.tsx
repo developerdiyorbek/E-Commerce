@@ -6,7 +6,7 @@ import { DataTable } from "./data-table";
 import AddTodo from "./_components/AddTodo";
 
 async function Page() {
-  const todosJSON = await fetch(`${BASE_URL}/todos`);
+  const todosJSON = await fetch(`${BASE_URL}/todos?limit=${35}`);
   const { todos } = await todosJSON.json();
 
   return (

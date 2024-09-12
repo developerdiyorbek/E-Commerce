@@ -31,6 +31,7 @@ export interface IUser {
   lastName: string;
   password: string;
   phone: string;
+  birthdate: string;
 }
 
 export interface CategoryProps {

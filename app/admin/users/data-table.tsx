@@ -25,6 +25,8 @@ import { Input } from "@/components/ui/input";
 
 import { useState } from "react";
 import { Separator } from "@/components/ui/separator";
+import { IUser } from "./columns";
+import EditUser from "./_components/EditUser";
 
 interface DataTableProps<TData, TValue> {
   columns: ColumnDef<TData, TValue>[];
@@ -37,6 +39,8 @@ export function DataTable<TData, TValue>({
 }: DataTableProps<TData, TValue>) {
   const [sorting, setSorting] = useState<SortingState>([]);
   const [columnFilters, setColumnFilters] = useState<ColumnFiltersState>([]);
+  const [selectedUser, setSelectedUser] = useState<IUser | null>(null);
+  const [isModalOpen, setIsModalOpen] = useState(false);
 
   const table = useReactTable({
     data,
@@ -53,84 +57,121 @@ export function DataTable<TData, TValue>({
     },
   });
 
+  const handleEditClick = (user: IUser) => {
+    setSelectedUser(user);
+    setIsModalOpen(true);
+  };
+
+  const handleSave = (updatedUser: IUser) => {
+    console.log("User saved:", updatedUser);
+  };
+
   return (
-    <div className="rounded-md border bg-white dark:bg-slate-700 dark:text-white">
-      <div className="grid grid-cols-2 py-4 mx-4 items-center max-sm:grid-cols-1 max-sm:gap-y-2">
-        <Input
-          placeholder="Filter by name..."
-          value={
-            (table.getColumn("firstName")?.getFilterValue() as string) ?? ""
-          }
-          onChange={(event) =>
-            table.getColumn("firstName")?.setFilterValue(event.target.value)
-          }
-          className="max-w-sm"
-        />
-        <div className="sm:text-end max-md:text-sm text-muted-foreground">
-          There are {data.length} users
+    <>
+      <div className="rounded-md border bg-white dark:bg-slate-700 dark:text-white">
+        <div className="grid grid-cols-2 py-4 mx-4 items-center max-sm:grid-cols-1 max-sm:gap-y-2">
+          <Input
+            placeholder="Filter by name..."
+            value={
+              (table.getColumn("firstName")?.getFilterValue() as string) ?? ""
+            }
+            onChange={(event) =>
+              table.getColumn("firstName")?.setFilterValue(event.target.value)
+            }
+            className="max-w-sm"
+          />
+          <div className="sm:text-end max-md:text-sm text-muted-foreground">
+            There are {data.length} users
+          </div>
+        </div>
+        <Table>
+          <TableHeader>
+            {table.getHeaderGroups().map((headerGroup) => (
+              <TableRow key={headerGroup.id}>
+                {headerGroup.headers.map((header) => {
+                  return (
+                    <TableHead key={header.id}>
+                      {header.isPlaceholder
+                        ? null
+                        : flexRender(
+                            header.column.columnDef.header,
+                            header.getContext()
+                          )}
+                    </TableHead>
+                  );
+                })}
+              </TableRow>
+            ))}
+          </TableHeader>
+          <TableBody>
+            {table.getRowModel().rows?.length ? (
+              table.getRowModel().rows.map((row) => (
+                <TableRow
+                  key={row.id}
+                  data-state={row.getIsSelected() && "selected"}
+                >
+                  {row.getVisibleCells().map((cell) => (
+                    <TableCell key={cell.id}>
+                      {flexRender(
+                        cell.column.columnDef.cell,
+                        cell.getContext()
+                      )}
+                    </TableCell>
+                  ))}
+                  <TableCell>
+                    <Button
+                      onClick={() => handleEditClick(row.original as IUser)}
+                      className="bg-amber-400 hover:bg-amber-400 hover:opacity-70"
+                      variant="secondary"
+                    >
+                      Edit
+                    </Button>
+                  </TableCell>
+                  <TableCell>
+                    <Button variant="destructive">Delete</Button>
+                  </TableCell>
+                </TableRow>
+              ))
+            ) : (
+              <TableRow>
+                <TableCell
+                  colSpan={columns.length}
+                  className="h-24 text-center"
+                >
+                  No results.
+                </TableCell>
+              </TableRow>
+            )}
+          </TableBody>
+        </Table>
+        <Separator />
+        <div className="flex items-center justify-end space-x-2 py-4 mr-4">
+          <Button
+            variant="outline"
+            size="sm"
+            onClick={() => table.previousPage()}
+            disabled={!table.getCanPreviousPage()}
+          >
+            Previous
+          </Button>
+          <Button
+            variant="default"
+            size="sm"
+            onClick={() => table.nextPage()}
+            disabled={!table.getCanNextPage()}
+          >
+            Next
+          </Button>
         </div>
       </div>
-      <Table>
-        <TableHeader>
-          {table.getHeaderGroups().map((headerGroup) => (
-            <TableRow key={headerGroup.id}>
-              {headerGroup.headers.map((header) => {
-                return (
-                  <TableHead key={header.id}>
-                    {header.isPlaceholder
-                      ? null
-                      : flexRender(
-                          header.column.columnDef.header,
-                          header.getContext()
-                        )}
-                  </TableHead>
-                );
-              })}
-            </TableRow>
-          ))}
-        </TableHeader>
-        <TableBody>
-          {table.getRowModel().rows?.length ? (
-            table.getRowModel().rows.map((row) => (
-              <TableRow
-                key={row.id}
-                data-state={row.getIsSelected() && "selected"}
-              >
-                {row.getVisibleCells().map((cell) => (
-                  <TableCell key={cell.id}>
-                    {flexRender(cell.column.columnDef.cell, cell.getContext())}
-                  </TableCell>
-                ))}
-              </TableRow>
-            ))
-          ) : (
-            <TableRow>
-              <TableCell colSpan={columns.length} className="h-24 text-center">
-                No results.
-              </TableCell>
-            </TableRow>
-          )}
-        </TableBody>
-      </Table>
-      <Separator />
-      <div className="flex items-center justify-end space-x-2 py-4 mr-4">
-        <Button
-          variant="outline"
-          size="sm"
-          onClick={() => table.previousPage()}
-          disabled={!table.getCanPreviousPage()}
-        >
-          Previous
-        </Button>
-        <Button
-          variant="default"
-          size="sm"
-          onClick={() => table.nextPage()}
-          disabled={!table.getCanNextPage()}
-        >
-          Next
-        </Button>
-      </div>
-    </div>
+      {isModalOpen && (
+        <EditUser
+          isOpen={isModalOpen}
+          onClose={() => setIsModalOpen(false)}
+          user={selectedUser as IUser}
+          onSave={handleSave}
+        />
+      )}
+    </>
   );
 }

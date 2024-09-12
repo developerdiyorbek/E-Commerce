@@ -4,9 +4,9 @@ import StatisticsCard from "./_components/StatisticsCard";
 import { ClipboardCheck, StickyNote, Users } from "lucide-react";
 
 async function Page() {
-  const usersJSON = await fetch(`${BASE_URL}/users`);
-  const todosJSON = await fetch(`${BASE_URL}/todos`);
-  const postsJSON = await fetch(`${BASE_URL}/posts`);
+  const usersJSON = await fetch(`${BASE_URL}/users?limit=${50}`);
+  const todosJSON = await fetch(`${BASE_URL}/todos?limit=${35}`);
+  const postsJSON = await fetch(`${BASE_URL}/posts?limit=${70}`);
 
   const { users } = await usersJSON.json();
   const { todos } = await todosJSON.json();

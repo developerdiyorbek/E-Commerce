@@ -6,7 +6,7 @@ import { DataTable } from "./data-table";
 import { Separator } from "@/components/ui/separator";
 
 async function Page() {
-  const postsJSON = await fetch(`${BASE_URL}/posts`);
+  const postsJSON = await fetch(`${BASE_URL}/posts?limit=${70}`);
   const { posts } = await postsJSON.json();
 
   return (

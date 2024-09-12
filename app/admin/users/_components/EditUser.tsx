@@ -1,79 +1,62 @@
-"use client";
-
 import FieldForm from "@/components/shared/FieldForm";
 import { Button } from "@/components/ui/button";
-
 import {
   Dialog,
   DialogContent,
-  DialogDescription,
   DialogHeader,
+  DialogDescription,
   DialogTitle,
-  DialogTrigger,
 } from "@/components/ui/dialog";
-
 import {
   Select,
-  SelectContent,
-  SelectItem,
   SelectTrigger,
   SelectValue,
+  SelectContent,
+  SelectItem,
 } from "@/components/ui/select";
-
-import { addUserSchema } from "@/lib/validation";
+import { editUserSchema } from "@/lib/validation";
 import { ErrorMessage, Form, Formik } from "formik";
+import { IUser } from "../columns";
 
-const initialValues = {
-  username: "",
-  name: "",
-  gender: "",
-  birthdate: "",
-};
-
-interface FormProps {
-  username: string;
-  name: string;
-  gender: string;
-  birthdate: string;
+interface Props {
+  isOpen: boolean;
+  onClose: () => void;
+  user: IUser;
+  onSave: (user: IUser) => void;
 }
 
-function AddUser() {
-  const handleSubmit = async (
-    values: FormProps,
-    { resetForm }: { resetForm: () => void }
-  ) => {
-    console.log(values);
-
-    resetForm();
+function EditUser({ isOpen, onClose, user, onSave }: Props) {
+  const handleSubmit = async (values: any) => {
+    onSave(values);
   };
 
   return (
-    <Dialog>
-      <DialogTrigger asChild>
-        <Button variant={"default"}>Add User</Button>
-      </DialogTrigger>
+    <Dialog open={isOpen} onOpenChange={onClose}>
       <DialogContent className="w-[90%]">
         <DialogHeader>
-          <DialogTitle>Add User Modal</DialogTitle>
+          <DialogTitle>Edit User Modal</DialogTitle>
           <DialogDescription></DialogDescription>
         </DialogHeader>
         <Formik
-          initialValues={initialValues}
-          validationSchema={addUserSchema}
+          initialValues={{
+            name: `${user.firstName}`,
+            gender: `${user.gender}`,
+            birthdate: "",
+          }}
+          validationSchema={editUserSchema}
           onSubmit={handleSubmit}
         >
           {({ isSubmitting, setFieldValue }) => (
             <Form>
-              <FieldForm name="name" placeholder="Enter your name" />
-              <FieldForm name="username" placeholder="Enter your username" />
+              <FieldForm name="name" placeholder="Edit your name" />
               <FieldForm
                 name="birthdate"
-                placeholder="Enter your birthdate"
+                placeholder="Edit your birthdate"
                 type="date"
               />
               <Select onValueChange={(value) => setFieldValue("gender", value)}>
                 <SelectTrigger
-                  defaultValue={""}
+                  defaultValue={`${user.gender}`}
                   className="w-full"
                   name="gender"
                 >
@@ -95,7 +78,7 @@ function AddUser() {
                 className="ml-auto block mt-2"
                 variant={"outline"}
               >
-                Submit
+                Save
               </Button>
             </Form>
           )}
@@ -105,4 +88,4 @@ function AddUser() {
   );
 }
 
-export default AddUser;
+export default EditUser;
