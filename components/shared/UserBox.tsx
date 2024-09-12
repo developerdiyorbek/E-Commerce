@@ -20,7 +20,8 @@ function UserBox() {
   const { setIsAuth } = authStore();
   const { data: user, isLoading } = getLoginUser();
 
-  if (isLoading) return <Skeleton className="size-10 rounded-full" />;
+  if (isLoading)
+    return <Skeleton className="size-10 rounded-full" aria-label="loading" />;
 
   // on Log Out
   const handleLogout = () => {
@@ -33,14 +34,24 @@ function UserBox() {
   return (
     <DropdownMenu>
       <DropdownMenuTrigger asChild>
-        <Avatar className="size-10 cursor-pointer">
-          <AvatarImage src={user.image} className="object-cover" />
+        <Avatar
+          className="size-10 cursor-pointer"
+          aria-label="User avatar, open menu"
+          aria-haspopup="true"
+          aria-expanded="false"
+        >
+          <AvatarImage
+            src={user.image}
+            alt={`${user.firstName} ${user.lastName}'s avatar`}
+            className="object-cover"
+          />
         </Avatar>
       </DropdownMenuTrigger>
       <DropdownMenuContent
         className="max-md:w-52 w-80"
         align="start"
         alignOffset={11}
+        aria-label="User menu"
       >
         <DropdownMenuGroup>
           <div className="flex flex-col space-y-4 p-2">
@@ -52,7 +63,10 @@ function UserBox() {
               <div className="flex items-center gap-x-2">
                 <div className="rounded-md bg-secondary p-1">
                   <Avatar className="size-8">
-                    <AvatarImage src={user.image} />
+                    <AvatarImage
+                      src={user.image}
+                      alt={`${user.firstName} ${user.lastName}'s avatar`}
+                    />
                   </Avatar>
                 </div>
 
@@ -67,18 +81,28 @@ function UserBox() {
           <DropdownMenuSeparator />
           <div className="flex flex-col space-y-2">
             <Link href={"/profile"}>
-              <DropdownMenuItem className="w-full cursor-pointer text-muted-foreground">
+              <DropdownMenuItem
+                className="w-full cursor-pointer text-muted-foreground"
+                role="menuitem"
+                aria-label="go to profile page"
+              >
                 Profile
               </DropdownMenuItem>
             </Link>
-            <Link href={"/admin"}>
-              <DropdownMenuItem className="w-full cursor-pointer text-muted-foreground">
+            <Link href={"/admin"} aria-label="go to admin page">
+              <DropdownMenuItem
+                className="w-full cursor-pointer text-muted-foreground"
+                role="menuitem"
+                aria-label="go to admin page"
+              >
                 Admin
               </DropdownMenuItem>
             </Link>
             <DropdownMenuItem
               className="w-full cursor-pointer text-muted-foreground"
               onClick={handleLogout}
+              role="menuitem"
+              aria-label="Log out"
             >
               Log Out
             </DropdownMenuItem>

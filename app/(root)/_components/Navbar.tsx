@@ -25,11 +25,15 @@ function Navbar() {
       <div className="container mx-auto flex h-full max-w-7xl items-center justify-between">
         <div className="flex items-center gap-4">
           <Logo />
-          <nav className="hidden items-center gap-3 border-l pl-2 md:flex">
+          <nav
+            className="hidden items-center gap-3 border-l pl-2 md:flex"
+            aria-label="Main navigation"
+          >
             {navLinks.map((nav) => (
               <Link
                 href={`/${nav.route}`}
                 key={nav.id}
+                aria-label={nav.name}
                 className={`flex h-10 cursor-pointer items-center gap-2 rounded-md px-3 transition-colors hover:bg-blue-400/20 ${
                   nav.route === pathname.slice(1) && "bg-blue-400/20"
                 } `}
@@ -46,22 +50,30 @@ function Navbar() {
               size={"icon"}
               variant={cartsLength() ? "secondary" : "outline"}
               className="relative"
+              aria-label="View shopping cart"
             >
-              <Link href={"/shoppingcart"}>
+              <Link
+                href={"/shoppingcart"}
+                aria-label="go to shopping cart page"
+              >
                 <ShoppingCart />
                 {cartsLength() ? (
-                  <div className="absolute -right-3 -top-2 flex size-6 items-center justify-center rounded-full bg-destructive">
+                  <div
+                    className="absolute -right-3 -top-2 flex size-6 items-center justify-center rounded-full bg-destructive"
+                    aria-label={`You have ${cartsLength()} items in your cart`}
+                  >
                     {cartsLength()}
                   </div>
                 ) : null}
               </Link>
             </Button>
-            <ModeToggle />
+            <ModeToggle aria-label="Toggle light/dark mode" />
             <Mobile isLogin={isAuth} />
           </div>
           {!isAuth ? (
             <Link href={"/login"}>
               <Button
+                aria-label="go to login page"
                 size={"lg"}
                 className="hidden md:flex transition-colors hover:bg-primary/80"
               >
@@ -69,9 +81,12 @@ function Navbar() {
               </Button>
             </Link>
           ) : isLoading ? (
-            <Skeleton className="size-10 rounded-md" />
+            <Skeleton
+              className="size-10 rounded-md"
+              aria-label="Loading user data"
+            />
           ) : (
-            <UserBox />
+            <UserBox aria-label="User menu" />
           )}
         </div>
       </div>

@@ -10,13 +10,19 @@ function Profile() {
   if (isLoading) return <Loading />;
 
   return (
-    <section className="container mx-auto py-5 md:py-10 max-w-7xl">
+    <section
+      className="container mx-auto py-5 md:py-10 max-w-7xl"
+      aria-labelledby="profile page"
+    >
+      <h1 id="profile-heading" className="sr-only">
+        User Profile
+      </h1>
       <div className="flex max-md:flex-col md:space-x-20 max-md:space-y-9">
         <div className="relative size-52">
           <Image
             src={user.image}
             fill
-            alt="user image"
+            alt={`picture of ${user.firstName}`}
             sizes="(max-width: 768px) 100vw, (max-width: 1200px) 50vw, 33vw"
           />
         </div>

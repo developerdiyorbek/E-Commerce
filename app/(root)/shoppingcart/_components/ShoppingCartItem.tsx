@@ -16,7 +16,10 @@ function ShoppingCartItem(card: Props) {
   return (
     <div className="grid w-full grid-cols-3 gap-4 rounded-md p-4 shadow-md dark:shadow-sm dark:shadow-white max-md:grid-cols-1">
       <div className="col-span-2  flex items-center gap-2">
-        <div className="size-48 max-md:size-24 relative">
+        <div
+          className="size-48 max-md:size-24 relative"
+          aria-label="item image"
+        >
           <CustomImage fill product={card} />
         </div>
         <div className="flex flex-col">
@@ -31,18 +34,23 @@ function ShoppingCartItem(card: Props) {
       </div>
       <div className="flex items-center justify-end gap-2">
         <div className="flex items-center gap-1">
-          <p className="font-space-grotesk text-xl font-bold">
+          <p
+            className="font-space-grotesk text-xl font-bold"
+            aria-label={`quantity: ${card.quantity}`}
+          >
             {card.quantity}
           </p>
           <div className="flex flex-col">
             <ArrowBigUpDash
               className="cursor-pointer transition-all hover:opacity-80 active:scale-125"
               role="button"
+              aria-label="increment"
               onClick={() => increment(card.id)}
             />
             <ArrowBigDownDash
               className="cursor-pointer transition-all hover:opacity-80 active:scale-125"
               role="button"
+              aria-label="decrement"
               onClick={() =>
                 card.quantity === 1
                   ? removeFromCart(card.id)
@@ -51,7 +59,15 @@ function ShoppingCartItem(card: Props) {
             />
           </div>
         </div>
-        <h1 className="text-xl font-bold max-md:hidden">
+        <h1
+          className="text-xl font-bold max-md:hidden"
+          aria-label={`total price : ${(
+            card.quantity * card.price
+          ).toLocaleString("en-US", {
+            style: "currency",
+            currency: "USD",
+          })}`}
+        >
           {(card.quantity * card.price).toLocaleString("en-US", {
             style: "currency",
             currency: "USD",
@@ -61,6 +77,7 @@ function ShoppingCartItem(card: Props) {
           variant={"destructive"}
           size={"icon"}
           className="max-md:w-full"
+          aria-label="remove from cart"
           onClick={() => removeFromCart(card.id)}
         >
           <Trash2 className="size-5" />

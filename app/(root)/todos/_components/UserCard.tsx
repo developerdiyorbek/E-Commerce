@@ -11,10 +11,17 @@ import { Avatar, AvatarImage, AvatarFallback } from "@/components/ui/avatar";
 
 function UserCard({ user }: { user: IUser }) {
   return (
-    <Link href={`/users/${user.id}`} className="block hover:no-underline">
+    <Link
+      href={`/users/${user.id}`}
+      className="block hover:no-underline"
+      aria-label={`View todos of ${user.firstName} ${user.lastName}`}
+    >
       <Card className="hover:shadow-lg transition-shadow duration-200 border rounded-lg text-center">
         <CardHeader className="flex items-center">
-          <Avatar className="w-12 h-12">
+          <Avatar
+            className="w-12 h-12"
+            aria-label={`${user.firstName} ${user.lastName}'s profile picture`}
+          >
             <AvatarImage
               src={user.image}
               alt={`${user.firstName} ${user.lastName}`}
@@ -35,7 +42,12 @@ function UserCard({ user }: { user: IUser }) {
           </div>
         </CardHeader>
         <CardContent>
-          <p className="text-muted-foreground">{user.phone}</p>
+          <p
+            className="text-muted-foreground"
+            aria-label={`${user.firstName}'s phone number`}
+          >
+            {user.phone}
+          </p>
         </CardContent>
       </Card>
     </Link>

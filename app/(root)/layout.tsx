@@ -5,7 +5,9 @@ function Layout({ children }: ChildProps) {
   return (
     <>
       <Navbar />
-      <main className="mt-20">{children}</main>
+      <main className="mt-20" role="main">
+        {children}
+      </main>
     </>
   );
 }

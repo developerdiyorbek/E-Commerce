@@ -33,9 +33,15 @@ async function Page({ params: { userId } }: Props) {
   const { todos } = await userTodosJSON.json();
 
   return (
-    <section className="container mx-auto max-w-7xl py-12">
+    <section
+      className="container mx-auto max-w-7xl py-12"
+      aria-label={`${user.firstName}'s todos`}
+    >
       <div className="flex items-center space-x-6 mb-8">
-        <Avatar className="size-10 md:size-16">
+        <Avatar
+          className="size-10 md:size-16"
+          aria-label={`${user.firstName} ${user.lastName}'s profile picture`}
+        >
           <AvatarImage
             src={user.image}
             alt={`${user.firstName} ${user.lastName}`}
@@ -56,11 +62,17 @@ async function Page({ params: { userId } }: Props) {
       </div>
 
       <h2 className="text-xl font-bold mb-4">Todos</h2>
-      <div className="grid gap-4 sm:grid-cols-2 lg:grid-cols-3">
+      <div
+        className="grid gap-4 sm:grid-cols-2 lg:grid-cols-3"
+        role="list"
+        aria-labelledby={`${user.firstName}'s todos`}
+      >
         {todos.length ? (
           todos.map((todo: ITodo) => <TodoItem todo={todo} key={todo.id} />)
         ) : (
-          <div>Todos aren't available in this user</div>
+          <div aria-label={`Todos are not available in ${user.firstName} user`}>
+            Todos aren't available in this user
+          </div>
         )}
       </div>
     </section>

@@ -5,7 +5,10 @@ import PostItemBottom from "./PostItemBottom";
 
 function PostItem({ post }: { post: IPost }) {
   return (
-    <Link href={`/posts/${post.id}`}>
+    <Link
+      href={`/posts/${post.id}`}
+      aria-label={`Read more about ${post.title}`}
+    >
       <Card>
         <CardContent className="mt-4">
           <div className="sm:line-clamp-1 text-muted-foreground mb-3">

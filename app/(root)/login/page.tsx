@@ -59,8 +59,8 @@ function Login() {
   }, [isAuth]);
 
   return (
-    <section className="mt-40 container mx-auto">
-      <Card className="max-w-3xl w-full mx-auto">
+    <section className="mt-40 container mx-auto" aria-labelledby="login page">
+      <Card className="max-w-3xl w-full mx-auto" aria-label="Login form">
         <CardHeader>
           <h1 className="mx-auto text-2xl max-md:text-xl">Login</h1>
         </CardHeader>
@@ -72,12 +72,21 @@ function Login() {
           >
             {({ isSubmitting }) => (
               <Form>
-                <FieldForm name="username" placeholder="Enter your username" />
-                <FieldForm name="password" placeholder="Enter your password" />
+                <FieldForm
+                  name="username"
+                  placeholder="Enter your username"
+                  aria-required="true"
+                />
+                <FieldForm
+                  name="password"
+                  placeholder="Enter your password"
+                  aria-required="true"
+                />
                 <Button
                   type="submit"
                   disabled={isSubmitting}
                   className="ml-auto block"
+                  aria-label="Submit login form"
                 >
                   Submit
                 </Button>

@@ -34,7 +34,10 @@ async function Page({ params: { postId } }: Props) {
   const { comments } = await postCommentsJSON.json();
 
   return (
-    <section className="container mx-auto max-w-7xl pt-5">
+    <section
+      className="container mx-auto max-w-7xl pt-5"
+      aria-labelledby={`post: ${post.title}`}
+    >
       <h1 className="text-center mb-8 max-md:text-xl text-3xl text-muted-foreground">
         {post.title}
       </h1>
@@ -43,13 +46,17 @@ async function Page({ params: { postId } }: Props) {
       <h2 className="text-center max-md:my-4 my-8 max-md:text-lg text-2xl text-muted-foreground">
         Comments
       </h2>
-      <div className="grid sm:grid-cols-2 md:grid-cols-3 max-md:gap-3 gap-5">
+      <div
+        className="grid sm:grid-cols-2 md:grid-cols-3 max-md:gap-3 gap-5"
+        role="list"
+        aria-label="lists of comments"
+      >
         {comments.length ? (
           comments.map((comment: IComment) => (
             <CommentCard key={comment.id} comment={comment} />
           ))
         ) : (
-          <div>No comment</div>
+          <div aria-label="no comment">No comment</div>
         )}
       </div>
     </section>

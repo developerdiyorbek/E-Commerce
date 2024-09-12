@@ -9,8 +9,12 @@ import ShoppingCartItem from "./_components/ShoppingCartItem";
 
 function ShoppingCart() {
   const { carts, totalPrice, taxes } = useCart();
+
   return (
-    <section className="container mx-auto max-w-7xl pt-10">
+    <section
+      className="container mx-auto max-w-7xl pt-10"
+      aria-labelledby="shopping cart page"
+    >
       <div className="grid grid-cols-3 gap-2 max-md:grid-cols-1">
         <Card className="col-span-2">
           <CardContent className="py-4">
@@ -24,9 +28,15 @@ function ShoppingCart() {
                 </p>
               </>
             )}
-            {carts.length === 0 && <div>No cart found</div>}
+            {carts.length === 0 && (
+              <div aria-label="no cart found">No cart found</div>
+            )}
 
-            <div className="my-3 flex flex-col space-y-3">
+            <div
+              className="my-3 flex flex-col space-y-3"
+              role="list"
+              aria-label="list of item"
+            >
               {carts.map((card) => (
                 <ShoppingCartItem key={card.id} {...card} />
               ))}
@@ -66,7 +76,10 @@ function ShoppingCart() {
                 </div>
               </div>
               {carts.length > 0 && (
-                <Button className="group mt-3 flex items-center justify-between px-2 font-bold w-full">
+                <Button
+                  className="group mt-3 flex items-center justify-between px-2 font-bold w-full"
+                  aria-label="Proceed to checkout"
+                >
                   <span>
                     {(totalPrice() + taxes()).toLocaleString("en-US", {
                       style: "currency",

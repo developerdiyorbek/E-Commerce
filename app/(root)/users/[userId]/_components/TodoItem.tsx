@@ -10,11 +10,13 @@ function TodoItem({ todo }: { todo: ITodo }) {
           className="flex items-center justify-between cursor-pointer"
           htmlFor={`todo${todo.id}`}
         >
-          {todo.todo}
+          <span>{todo.todo}</span>
           <Checkbox
             id={`todo${todo.id}`}
             defaultChecked={todo.completed}
             className="size-5 max-md:size-4"
+            aria-checked={todo.completed}
+            role="checkbox"
           />
         </label>
       </CardHeader>

@@ -26,9 +26,15 @@ function ProductDetail({ params: { productId } }: Props) {
   };
 
   return (
-    <section className="container mx-auto max-w-7xl py-10">
+    <section
+      className="container mx-auto max-w-7xl py-10"
+      aria-label="product-detail"
+    >
       <div className="flex flex-col md:flex-row items-center gap-8 px-4">
-        <div className="relative size-96 max-md:size-60">
+        <div
+          className="relative size-96 max-md:size-60"
+          aria-labelledby="product-image"
+        >
           <CustomImage product={product} fill />
         </div>
 
@@ -40,7 +46,10 @@ function ProductDetail({ params: { productId } }: Props) {
               currency: "USD",
             })}
           </h2>
-          <div className="flex items-center gap-1">
+          <div
+            className="flex items-center gap-1"
+            aria-label={`Product rating : ${product.rating}`}
+          >
             {Array.from({ length: Math.floor(product.rating) }).map((_, i) => (
               <Star key={i} className="fill-yellow-400 text-yellow-400" />
             ))}
@@ -55,7 +64,12 @@ function ProductDetail({ params: { productId } }: Props) {
               {product.description}
             </p>
 
-            <Button variant={"secondary"} className="mt-2" onClick={onCart}>
+            <Button
+              variant={"secondary"}
+              className="mt-2"
+              onClick={onCart}
+              aria-label={`Add ${product.title} to cart`}
+            >
               Add to card
             </Button>
           </div>

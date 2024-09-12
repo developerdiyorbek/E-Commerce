@@ -12,11 +12,14 @@ async function Posts() {
   const { posts } = await postsJSON.json();
 
   return (
-    <section className="container py-12 mx-auto max-w-7xl">
+    <section
+      className="container py-12 mx-auto max-w-7xl"
+      aria-labelledby="list of posts"
+    >
       <h1 className="text-center mb-8 max-md:text-2xl text-3xl text-muted-foreground">
         Posts
       </h1>
-      <div className="grid sm:grid-cols-2 md:grid-cols-3 gap-5">
+      <div className="grid sm:grid-cols-2 md:grid-cols-3 gap-5" role="list">
         {posts.map((post: IPost) => (
           <PostItem post={post} key={post.id} />
         ))}
