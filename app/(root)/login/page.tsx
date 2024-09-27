@@ -12,8 +12,8 @@ import { useEffect } from "react";
 import { authStore } from "@/hooks/authStore";
 
 const initialValues = {
-  username: "noahh",
-  password: "noahhpass",
+  username: "michaelw",
+  password: "michaelwpass",
 };
 
 interface FormProps {
@@ -36,7 +36,8 @@ function Login() {
           expiresInMins: 1,
         })
       );
-      localStorage.setItem("token", login.data.token);
+
+      localStorage.setItem("token", login.data.accessToken);
       localStorage.setItem("refreshToken", login.data.refreshToken);
       setIsAuth(true);
       toast.success("Successfully login");
