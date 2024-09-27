@@ -41,7 +41,7 @@ customAxios.interceptors.response.use(
             expiresInMins: 90,
           })
         );
-        localStorage.setItem("token", data.token);
+        localStorage.setItem("token", data.accessToken);
         return customAxios.request(originalRequest);
       } catch (error) {
         console.log(error);
